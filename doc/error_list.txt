@@ -1,0 +1,51 @@
+﻿Fehlerebene:
+
+	Logik:
+		Fehlerhafte Wincondition: Falsche Kombination gewinnt
+			    L aus 3 Steinen oben Links in der Ecke
+		### 3+1 bei < 15x15
+			    
+		Fehlerhafte Wincondition: Richtige Kombination nicht erkannt
+			    Spalten und Diagonale nicht als WinCond 
+		### getM() == 7 rows nicht erkannt
+
+		Player haben die gleichen Steine
+		### TeSSA Red vs TeSSA Blue 
+
+		Score wird falsch berechnet: immer +2 immer
+		### Player 1 bekommt immer +2
+		
+		Unmögliche Wincondition b(m,n,k) = 3,3,6
+
+	Gui:
+		Score wird falsch dargestellt: "01" 
+		       Anhängen statt austauschen des Werts
+		### Player 2 bei getM() > 5
+		Score wird falsch berechnet: Nie bei Player 2
+		       -- zZ auskommentiert
+		Steine werden falsch zugeordnet 
+		### get_icon_for_player ordnet falsch zu, wenn player 1.icon == icon_x
+		
+	Programmierfehler:
+		NullPointer --- Feld wird fehlerhaft generiert
+
+		off-by-one button -> board mismatch
+		### if (board.getM() % 5 == 0 && board.getN() % 3 == 0) {
+              	### turn(im + 1, in + 1);
+
+		Of-by-One in einer der Schleifen mit <= WinCond statt < (checkWinCondition)
+		### for (int n = 0; n <= getN()-2; n++) {
+		
+		Fehlerhafte Bedingung CheckWinCondition: 
+			     last == board(c) statt !=
+		###               if (getM() < 3 && getN() < 3) {
+        ###		    win = true;
+        ###		  }
+
+		Token sind überschreibbar
+		### setToken2d()
+	
+	Easter Egg:
+		### if (m < 0 && m > -8 && n < 0 && m > -8) {
+		
+		
