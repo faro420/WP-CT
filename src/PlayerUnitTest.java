@@ -1,19 +1,13 @@
 
 import static org.junit.Assert.assertEquals;
 
-import javax.swing.JButton;
 import org.junit.Test;
 
-import gfx.MainWindow;
 import gfx.Ressources;
-import logic.Board;
 import logic.Player;
-import logic.WinState;
 
 
 public class PlayerUnitTest {
-
-	private static final int TIMEOUT = 0;
 
 	@Test
 	public void testGetIcon() throws InterruptedException {
