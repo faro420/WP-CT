@@ -1,3 +1,4 @@
+package tests;
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -34,13 +35,9 @@ public class Test01 {
   @Test
   public void test() throws InterruptedException {
     frame.turn(0, 0);
-    Thread.sleep(1000);
     frame.turn(0, 1);
-    Thread.sleep(1000);
     frame.turn(1, 0);
-    Thread.sleep(1000);
     frame.turn(0, 2);
-    Thread.sleep(1000);
     WinState winner = frame.turn(2, 0);
     assertTrue(WinState.player1 == winner);
   }

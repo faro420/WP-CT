@@ -1,3 +1,5 @@
+package tests;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -80,6 +82,32 @@ public class BoardUnitTest {
 		// assuming that active player is player one...
 		// and assuming that "Player 1" was set in initBoard @todo maybe use constant (?)
 		assertEquals("Player 1",board.getPlayerNameInField(0, 0));
+		
+		// nach einsicht code
+		board.nextTurn();
+		board.setToken2d(0, 1, board.getActivePlayer());
+		assertEquals("Player 2",board.getPlayerNameInField(0, 1));
+		assertEquals("        ",board.getPlayerNameInField(2, 1));
+	}
+
+	@Test
+	public void testGetPlayer2d() throws InterruptedException {
+		Player p1 = new Player("Player 1", Ressources.icon_x);
+		Player p2 = new Player("Player 2", Ressources.icon_o);
+		Board board = new Board(3, 3, 3, p1, p2);
+		board.setToken2d(0, 0, p1);
+		board.setToken2d(0, 1, p2);
+		// assuming that active player is player one...
+		// and assuming that "Player 1" was set in initBoard @todo maybe use constant (?)
+		assertEquals(p1,board.getPlayer2d(0, 0));
+		assertEquals(p2,board.getPlayer2d(0, 1));
+		assertEquals(null,board.getPlayer2d(0, 2));
+		
+		// nach einsicht code
+		board.nextTurn();
+		board.setToken2d(0, 1, board.getActivePlayer());
+		assertEquals("Player 2",board.getPlayerNameInField(0, 1));
+		assertEquals("        ",board.getPlayerNameInField(2, 1));
 	}
 	
 	@Test
@@ -168,6 +196,57 @@ public class BoardUnitTest {
 		board.nextTurn();
 		board.setToken2d(2, 0, board.getActivePlayer());//P2
 		assertEquals(WinState.tie, board.checkWin());
+	}
+
+	@Test
+	public void testCheckWinRows() throws InterruptedException {
+
+		Player p1 = new Player("Player 1", Ressources.icon_x);
+		Player p2 = new Player("Player 2", Ressources.icon_o);
+		Board board = new Board(7, 3, 2, p1, p2);
+		assertEquals(WinState.none, board.checkWin());
+		board.setToken2d(0, 0, board.getActivePlayer());//P1
+	}
+
+	@Test
+	public void testCheckWinDiagonalN2M2() throws InterruptedException {
+
+		Player p1 = new Player("Player 1", Ressources.icon_x);
+		Player p2 = new Player("Player 2", Ressources.icon_o);
+		Board board = new Board(2, 2, 2, p1, p2);
+		assertEquals(WinState.none, board.checkWin());
+		board.setToken2d(0, 0, p1);
+		board.setToken2d(0, 1, p2);
+		board.setToken2d(1, 1, p1);
+		assertEquals(WinState.player1, board.checkWin());
+	}
+	
+	@Test
+	public void testCheckWinRightLeftDiagonal() throws InterruptedException {
+		Player p1 = new Player("Player 1", Ressources.icon_x);
+		Player p2 = new Player("Player 2", Ressources.icon_o);
+		Board board = new Board(13, 13, 4, p1, p2);
+		assertEquals(WinState.none, board.checkWin());
+		board.setToken2d(0, 2, p1);
+		board.setToken2d(0, 1, p2);
+		board.setToken2d(1, 1, p1);
+		board.setToken2d(1, 2, p2);
+		board.setToken2d(2, 0, p1);
+		assertEquals(WinState.player1, board.checkWin());
+	}
+	
+	@Test
+	public void testCheckWinLarge() throws InterruptedException {
+		Player p1 = new Player("Player 1", Ressources.icon_x);
+		Player p2 = new Player("Player 2", Ressources.icon_o);
+		Board board = new Board(16, 16, 3, p1, p2);
+		assertEquals(WinState.none, board.checkWin());
+		board.setToken2d(0, 2, p1);
+		board.setToken2d(0, 1, p2);
+		board.setToken2d(1, 1, p1);
+		board.setToken2d(1, 2, p2);
+		board.setToken2d(2, 0, p1);
+		assertEquals(WinState.player1, board.checkWin());
 	}
 	
 	
