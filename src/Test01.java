@@ -23,6 +23,7 @@ public class Test01 {
     board = new Board(3, 3, 3, p1, p2);
     frame = new MainWindow(p1, p2, board);
     frame.setVisible(true);
+	//test
   }
 
   @After
